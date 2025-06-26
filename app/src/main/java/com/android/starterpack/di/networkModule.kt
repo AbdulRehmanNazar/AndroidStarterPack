@@ -22,7 +22,7 @@ val networkModule = module {
 
     single {
         Retrofit.Builder()
-            .baseUrl("https://api.github.com/repos/ruby/ruby/") // Replace with your base URL
+            .baseUrl("https://api.github.com/repos/ruby/ruby/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(get())
             .build()

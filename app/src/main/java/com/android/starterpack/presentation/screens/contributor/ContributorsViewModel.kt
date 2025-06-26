@@ -12,6 +12,7 @@ import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import com.android.starterpack.core.domain.Result
 
 /**
  * View model for contributor to define business logic for the list of contributors
@@ -45,11 +46,11 @@ class ContributorsViewModel(
 
         viewModelScope.launch {
             getRemoteContributorsUseCase()
-                .onSuccess { result ->
-                    _state.value = UiState.Success(result)
-                }
-                .onError { error ->
-                    _state.value = UiState.Error(error)
+                .collect { result ->
+                    _state.value = when (result) {
+                        is Result.Success -> UiState.Success(result.data)
+                        is Result.Error -> UiState.Error(result.error)
+                    }
                 }
         }
     }

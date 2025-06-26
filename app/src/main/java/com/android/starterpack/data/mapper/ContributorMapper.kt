@@ -1,5 +1,6 @@
 package com.android.starterpack.data.mapper
 
+import com.android.starterpack.data.local.entities.ContributorEntity
 import com.android.starterpack.data.remote.dto.ContributorDto
 import com.android.starterpack.domain.model.Contributor
 
@@ -17,11 +18,12 @@ object ContributorMapper {
     }
 
     // Remote DTO → Entity
-//    fun dtoToEntity(dto: ContributorDto): ContributorEntity {
-//        return ContributorEntity(
-//            login = dto.login, avatarUrl = dto.avatarUrl, contributions = dto.contributions.toLong()
-//        )
-//    }
+    fun dtoToEntity(dto: ContributorDto): ContributorEntity {
+        return ContributorEntity(
+            id = 0,
+            login = dto.login, avatarUrl = dto.avatarUrl, contributions = dto.contributions
+        )
+    }
 
     // Remote Domain → DTO
     fun domainToDto(dto: Contributor): ContributorDto {
@@ -31,20 +33,21 @@ object ContributorMapper {
     }
 
     // Domain → Local Entity
-//    fun domainToEntity(domain: Contributor): ContributorEntity {
-//        return ContributorEntity(
-//            login = domain.login,
-//            avatarUrl = domain.avatarUrl,
-//            contributions = domain.contributions.toLong()
-//        )
-//    }
+    fun domainToEntity(domain: Contributor): ContributorEntity {
+        return ContributorEntity(
+            id = 0,
+            login = domain.login,
+            avatarUrl = domain.avatarUrl,
+            contributions = domain.contributions
+        )
+    }
 
     // Local Entity → Domain
-//    fun entityToDomain(entity: ContributorEntity): Contributor {
-//        return Contributor(
-//            login = entity.login,
-//            avatarUrl = entity.avatarUrl,
-//            contributions = entity.contributions.toInt()
-//        )
-//    }
+    fun entityToDomain(entity: ContributorEntity): Contributor {
+        return Contributor(
+            login = entity.login,
+            avatarUrl = entity.avatarUrl,
+            contributions = entity.contributions
+        )
+    }
 }

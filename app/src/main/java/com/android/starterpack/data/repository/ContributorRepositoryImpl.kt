@@ -2,15 +2,20 @@ package com.android.starterpack.data.repository
 
 import com.android.starterpack.core.domain.DataError
 import com.android.starterpack.core.domain.Result
-import com.android.starterpack.core.domain.map
 import com.android.starterpack.data.mapper.ContributorMapper
-import com.android.starterpack.domain.datastore.ContributorsRemoteDataSource
+import com.android.starterpack.domain.datastore.remote.ContributorLocalDataSource
+import com.android.starterpack.domain.datastore.remote.ContributorsRemoteDataSource
 import com.android.starterpack.domain.model.Contributor
 import com.android.starterpack.domain.respository.ContributorRepository
+import kotlinx.coroutines.flow.Flow
 
 class ContributorRepositoryImpl(
-    private val contributorsRemoteDataSource: ContributorsRemoteDataSource
+    private val contributorsRemoteDataSource: ContributorsRemoteDataSource,
+    private val contributorLocalDataSource: ContributorLocalDataSource
 ) : ContributorRepository {
+    override fun getContributors(): Flow<Result<List<Contributor>, DataError.Local>> {
+        return contributorLocalDataSource.getContributors()
+    }
 
     override suspend fun getRemoteContributors(): Result<List<Contributor>, DataError.Remote> {
         return when (val result = contributorsRemoteDataSource.fetchContributors()) {

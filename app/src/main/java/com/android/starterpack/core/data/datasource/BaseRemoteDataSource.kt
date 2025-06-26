@@ -2,10 +2,6 @@ package com.android.starterpack.core.data.datasource
 
 import android.util.Log
 import com.android.starterpack.core.domain.DataError
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
 import retrofit2.Response
 import com.android.starterpack.core.domain.Result
 import com.google.gson.JsonParseException
@@ -14,7 +10,7 @@ import java.io.IOException
 /**
  * @Author: Abdul Rehman
  */
-abstract class BaseDataSource {
+abstract class BaseRemoteDataSource {
 
     suspend fun <T> makeApiCall(apiCall: suspend () -> Response<T>): Result<T, DataError> {
         return try {

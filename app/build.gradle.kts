@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -19,7 +20,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "APP_BASE_URL", "\"https://api.github.com/repos/ruby/ruby/\"")
+        }
         release {
+            buildConfigField("String", "APP_BASE_URL", "\"https://api.github.com/repos/ruby/ruby/\"")
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -36,6 +41,9 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+    buildFeatures {
+        buildConfig = true
     }
 }
 
@@ -76,6 +84,13 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.gson)
     implementation(libs.retrofit.log.interceptor)
+
+//    Room
+    //Room
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
 
 
 

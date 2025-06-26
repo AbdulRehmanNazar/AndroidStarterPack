@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
+import com.android.starterpack.BuildConfig
 import com.android.starterpack.presentation.screens.contributor.ContributorsListScreen
 import com.android.starterpack.ui.theme.AndroidStarterPackTheme
 

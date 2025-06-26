@@ -1,9 +1,8 @@
-package com.android.starterpack.domain.datastore
+package com.android.starterpack.domain.datastore.remote
 
 import com.android.starterpack.core.domain.DataError
 import com.android.starterpack.data.remote.dto.ContributorDto
 import com.android.starterpack.core.domain.Result
-import kotlinx.coroutines.flow.Flow
 
 /**
  * Abstraction for the Remote Data Source of Contributer

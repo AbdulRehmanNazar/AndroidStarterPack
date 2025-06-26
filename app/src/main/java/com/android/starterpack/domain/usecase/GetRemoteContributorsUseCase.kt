@@ -4,6 +4,7 @@ import com.android.starterpack.core.domain.DataError
 import com.android.starterpack.core.domain.Result
 import com.android.starterpack.domain.model.Contributor
 import com.android.starterpack.domain.respository.ContributorRepository
+import kotlinx.coroutines.flow.Flow
 
 
 /**
@@ -12,7 +13,7 @@ import com.android.starterpack.domain.respository.ContributorRepository
 class GetRemoteContributorsUseCase(
     private val repository: ContributorRepository
 ) {
-    suspend operator fun invoke(): Result<List<Contributor>, DataError> {
-        return repository.getRemoteContributors()
+    operator fun invoke(): Flow<Result<List<Contributor>, DataError.Local>> {
+        return repository.getContributors()
     }
 }
