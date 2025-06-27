@@ -13,12 +13,14 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import com.android.starterpack.core.domain.Result
+import com.android.starterpack.domain.respository.ContributorRepository
 
 /**
  * View model for contributor to define business logic for the list of contributors
  */
 class ContributorsViewModel(
     private val getRemoteContributorsUseCase: GetRemoteContributorsUseCase,
+    private val contributorRepository: ContributorRepository
 ) : ViewModel() {
     private val _state = MutableStateFlow<UiState<List<Contributor>>>(UiState.Loading)
     val state: StateFlow<UiState<List<Contributor>>> = _state
@@ -33,9 +35,9 @@ class ContributorsViewModel(
      * Load remote contributors
      */
     private fun loadRemoteContributors() {
-//        viewModelScope.launch {
-//            contributorRepository.getRemoteContributors()
-//        }
+        viewModelScope.launch {
+            contributorRepository.getRemoteContributors()
+        }
     }
 
     /**

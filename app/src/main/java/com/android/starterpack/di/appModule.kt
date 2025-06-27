@@ -20,5 +20,5 @@ val appModule = module {
     single<ContributorLocalDataSource> {
         ContributorLocalDataSourceImpl(get())
     }
-    single<ContributorRepository> { ContributorRepositoryImpl(get()) }
+    single<ContributorRepository> { ContributorRepositoryImpl(get(), get()) }
 }

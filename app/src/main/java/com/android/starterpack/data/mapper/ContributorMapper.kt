@@ -20,7 +20,6 @@ object ContributorMapper {
     // Remote DTO → Entity
     fun dtoToEntity(dto: ContributorDto): ContributorEntity {
         return ContributorEntity(
-            id = 0,
             login = dto.login, avatarUrl = dto.avatarUrl, contributions = dto.contributions
         )
     }
@@ -35,7 +34,6 @@ object ContributorMapper {
     // Domain → Local Entity
     fun domainToEntity(domain: Contributor): ContributorEntity {
         return ContributorEntity(
-            id = 0,
             login = domain.login,
             avatarUrl = domain.avatarUrl,
             contributions = domain.contributions

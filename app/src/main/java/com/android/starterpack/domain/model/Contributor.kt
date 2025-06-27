@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
  * Domain model for Contributer
  */
 data class Contributor(
-    val login: String? = null,
+    val login: String = "",
     @SerializedName("avatar_url")
     val avatarUrl: String? = null,
     val contributions: Int? = null

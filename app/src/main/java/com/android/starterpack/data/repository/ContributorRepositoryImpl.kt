@@ -20,6 +20,10 @@ class ContributorRepositoryImpl(
     override suspend fun getRemoteContributors(): Result<List<Contributor>, DataError.Remote> {
         return when (val result = contributorsRemoteDataSource.fetchContributors()) {
             is Result.Success -> {
+                //Save in local DB while fetched data from server
+                contributorLocalDataSource.insertContributors(result.data.map {
+                    ContributorMapper.dtoToDomain(it)
+                })
                 val domainList = result.data.map { ContributorMapper.dtoToDomain(it) }
                 Result.Success(domainList)
             }

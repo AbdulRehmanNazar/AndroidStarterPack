@@ -7,6 +7,7 @@ import com.android.starterpack.domain.model.Contributor
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import com.android.starterpack.core.domain.Result
+import com.android.starterpack.data.local.AppDataBase
 import com.android.starterpack.data.mapper.ContributorMapper
 import kotlinx.coroutines.flow.catch
 
@@ -14,11 +15,11 @@ import kotlinx.coroutines.flow.catch
  * Implementation of DB Entity operations with Data source
  */
 class ContributorLocalDataSourceImpl(
-    private val dao: ContributorDao
+    private val appDataBase: AppDataBase
 ) : ContributorLocalDataSource {
 
     override fun getContributors(): Flow<Result<List<Contributor>, DataError.Local>> {
-        return dao.observeAllContributors()
+        return appDataBase.contributorDao().observeAllContributors()
             .map { list ->
                 Result.Success(list.map { ContributorMapper.entityToDomain(it) })
             }
@@ -30,7 +31,7 @@ class ContributorLocalDataSourceImpl(
     override suspend fun insertContributors(contributors: List<Contributor>): Result<Unit, DataError.Local> {
         return try {
             val entities = contributors.map { ContributorMapper.domainToEntity(it) }
-            dao.insertContributors(entities)
+            appDataBase.contributorDao().insertContributors(entities)
             Result.Success(Unit)
         } catch (e: Exception) {
             Result.Error(DataError.Local.Unknown(e.message.toString()))
@@ -38,6 +39,6 @@ class ContributorLocalDataSourceImpl(
     }
 
     override suspend fun clearContributors() {
-        return dao.clearAll()
+        return appDataBase.contributorDao().clearAll()
     }
 }
