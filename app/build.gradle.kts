@@ -1,18 +1,17 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("com.google.devtools.ksp")
+    alias(libs.plugins.ksp)
 }
 
 android {
     namespace = "com.android.starterpack"
-    compileSdk = 35
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "com.android.starterpack"
         minSdk = 24
-        targetSdk = 35
+        targetSdk = 37
         versionCode = 1
         versionName = "1.0"
 
@@ -35,9 +34,6 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
     }
     buildFeatures {
         compose = true
@@ -88,9 +84,9 @@ dependencies {
 //    Room
     //Room
     implementation(libs.androidx.room.runtime)
-    annotationProcessor(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
+    implementation(libs.kotlinx.serialization.json)
 
 
 
